@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2BA24C">
+<title>자원봉사자 안내 · 2026 서울발달장애인사생대회</title>
+<!--
+  ════════════════════════════════════════════════
+   2026 서울발달장애인사생대회 · 자원봉사자 안내문
+  ════════════════════════════════════════════════
+  · 파일 하나로 동작합니다. 인터넷 연결이 없어도 약도가 보입니다.
+  · 출처: 발달장복-2026-5713 「2026 서울발달장애인사생대회 후원 및 임직원 봉사활동 요청」
+  · [수정 1] 색·글자 크기 — 아래 :root
+  · [수정 2] 봉사 정보 — 봉사 개요 카드 (시간·장소·집결지)
+  · [수정 3] 봉사 역할 — "무슨 일을 하나요" 카드
+  · [수정 4] 경로 안내 — 각 data-info 블록의 글
+-->
+<style>
+  /* ════════ [수정 1] 디자인 ════════ */
+  :root{
+    --cream:#FBF6E6; --sky:#CBE4F7; --grass:#E3EFC2;
+    --green:#2BA24C; --green-deep:#1B7C39; --green-pale:#E7F4E4;
+    --red:#C8302B; --red-pale:#FBEAE6; --blue:#2F7FBF;
+    --ink:#1D1D1B; --ink-soft:#5A5A54;
+    --line3:#EF7C1C; --line5:#8B5FA8;
+    --bw:2.5px; --r-card:16px; --r-ctl:12px;
+    --font:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+    --base:18px; --scale:1;   /* 어르신 기준 — PC 18px, 휴대폰 20px */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--cream);color:var(--ink);font-family:var(--font);
+    font-size:calc(var(--base) * var(--scale));line-height:1.7;word-break:keep-all;
+    padding-bottom:28px;
+  }
+  .wrap{max-width:620px;margin:0 auto;padding:0 14px}
+
+  header{background:var(--sky);border-bottom:3px solid var(--ink);padding:22px 0 32px}
+  .brand{font-size:.8em;color:#2C4A5E;font-weight:600;margin-bottom:6px}
+  h1{font-size:1.5em;font-weight:800;line-height:1.25;letter-spacing:-.02em;color:var(--green-deep)}
+  .when{margin-top:12px;font-size:.94em;font-weight:700;color:#1F3B4D}
+  .when small{display:block;font-weight:500;color:#456173;font-size:.88em;margin-top:3px}
+  .textsize{display:flex;gap:7px;margin-top:16px;align-items:center;flex-wrap:wrap}
+  .textsize span{font-size:.82em;color:#2C4A5E;font-weight:700;width:100%}
+  .textsize button{min-width:58px;min-height:52px;border:var(--bw) solid var(--ink);background:#fff;
+    color:var(--ink);border-radius:var(--r-ctl);font-weight:800;cursor:pointer;font-family:inherit;line-height:1}
+  .textsize button[aria-pressed="true"]{background:var(--green);color:#fff}
+
+  main.wrap{padding-top:40px}   /* 표지와 봉사 개요 사이 여백 — .wrap 보다 우선하도록 main.wrap 으로 씁니다 */
+  .card{background:#fff;border:var(--bw) solid var(--ink);border-radius:var(--r-card);padding:16px;margin-bottom:12px}
+  .card h2{font-size:1.22em;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .card h2::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--green);border:2px solid var(--ink);flex:none}
+  .card p{color:var(--ink-soft);font-size:1em}
+  .sub{color:var(--ink-soft);font-size:.96em;margin-bottom:14px}
+
+  .routes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+  .routes button{display:flex;align-items:center;gap:9px;min-height:72px;padding:12px;background:#fff;
+    border:var(--bw) solid var(--ink);border-radius:var(--r-ctl);font-family:inherit;font-size:1em;
+    font-weight:800;color:var(--ink);cursor:pointer;text-align:left;line-height:1.3;min-width:0;overflow-wrap:anywhere}
+  .routes button[aria-selected="true"]{background:var(--green);color:#fff}
+  .ln{flex:none;color:#fff;font-size:.8em;font-weight:800;border-radius:7px;padding:4px 9px;border:2px solid var(--ink)}
+  .ln3{background:var(--line3)} .ln5{background:var(--line5)} .lnp{background:#4B5563}
+
+  figure{margin:0}
+  .map{background:#EDECE8;border:var(--bw) solid var(--ink);border-radius:var(--r-ctl);overflow:hidden}
+  .map svg{display:block;width:100%;height:auto}
+  figcaption{font-size:.84em;color:var(--ink-soft);margin-top:8px;text-align:right}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:.9em;font-weight:800}
+  .legend i{display:inline-block;width:30px;height:0;border-top:5px dashed var(--red);vertical-align:middle;margin-right:7px}
+  .legend .b i{border-top-color:var(--blue)}
+  .rt-title{font-weight:800;font-size:1.15em;margin:18px 0 6px;color:var(--green-deep)}
+  .rt-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .rt-meta span{background:var(--grass);border:2px solid var(--ink);border-radius:8px;padding:5px 11px;font-size:.88em;font-weight:800}
+  .rt-meta span.warnchip{background:var(--red-pale);border-color:var(--red);color:#8C201C}
+  .steps{list-style:none;counter-reset:s}
+  .steps li{counter-increment:s;display:flex;gap:12px;padding:13px 0;font-size:1em;align-items:flex-start;border-bottom:2px dashed #EDE7D4}
+  .steps li:last-child{border-bottom:none}
+  .steps li::before{content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--sky);
+    border:2.5px solid var(--ink);color:var(--ink);font-size:.82em;font-weight:800;display:grid;place-items:center;margin-top:1px}
+  .route-line{fill:none;stroke:var(--red);stroke-width:9;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:16 12;animation:flow 1.4s linear infinite}
+  .route-line.alt{stroke:var(--blue)}
+  @keyframes flow{to{stroke-dashoffset:-50}}
+  @media (prefers-reduced-motion:reduce){.route-line{animation:none}}
+
+  .warn{background:var(--red-pale);border:2.5px solid var(--red);border-radius:12px;padding:13px 15px;font-size:.95em}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:62px;padding:14px;
+    border-radius:14px;background:var(--green);color:#fff;font-weight:800;font-size:1em;text-decoration:none;
+    border:var(--bw) solid var(--ink);cursor:pointer;font-family:inherit;margin-top:12px}
+  .btn.ghost{background:#fff;color:var(--green-deep)}
+  .btn.call{background:var(--red)}
+
+  .eyebrow{font-size:.86em;font-weight:800;color:var(--green);margin-bottom:4px}
+  .hero{background:var(--green);color:#fff;border-color:var(--ink)}
+  .hero h2{color:#fff}
+  .hero h2::before{background:#fff}
+  .hero dl.info dt{color:#CFF0D6}
+  .hero dl.info dd{color:#fff}
+  .hero dl.info dd b{color:#fff;font-size:1.12em}
+  dl.info{display:grid;grid-template-columns:auto 1fr;gap:14px 16px;font-size:1em}
+  dl.info dt{font-weight:800;color:var(--green-deep);white-space:nowrap}
+  dl.info dd{color:var(--ink-soft)}
+  dl.info dd b{color:var(--ink)}
+  @media (max-width:520px){
+    dl.info{grid-template-columns:1fr;gap:5px}
+    dl.info dt{margin-top:14px;font-size:.92em}
+    dl.info dt:first-child{margin-top:0}
+  }
+  .tl{list-style:none}
+  .tl li{display:flex;gap:12px;padding:13px 6px;border-radius:10px;align-items:flex-start}
+  .tl li+li{border-top:2px dashed #EDE7D4}
+  .tl time{flex:none;width:6.8em;font-weight:800;font-size:.96em;color:var(--green-deep)}
+  .tl li.key{background:var(--grass)}
+  .tl li.key .what{font-weight:700}
+  .roles{list-style:none;counter-reset:r}
+  .roles li{counter-increment:r;display:flex;gap:12px;padding:12px 0;border-bottom:2px solid #F0EBD8;align-items:flex-start}
+  .roles li:last-child{border-bottom:none}
+  .roles li::before{content:counter(r);flex:none;width:28px;height:28px;border-radius:50%;background:var(--green);
+    border:2.5px solid var(--ink);color:#fff;font-size:.8em;font-weight:800;display:grid;place-items:center;margin-top:2px}
+  .roles b{display:block;font-weight:800}
+  .roles span{font-size:.96em;color:var(--ink-soft)}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tags span{background:var(--grass);border:2px solid var(--ink);border-radius:9px;padding:9px 13px;font-size:.96em;font-weight:700}
+  .tips{list-style:none}
+  .tips li{display:flex;gap:11px;padding:13px 0;border-bottom:2px dashed #EDE7D4;align-items:flex-start;font-size:1em}
+  .tips li:last-child{border-bottom:none}
+  .tips li::before{content:"";flex:none;width:11px;height:11px;border-radius:50%;background:var(--green);
+    border:2px solid var(--ink);margin-top:8px}
+  .tips b{color:var(--ink)}
+  .divider-label{font-size:.86em;color:#8A8A80;text-align:center;margin:26px 0 12px;font-weight:800}
+  .foot{text-align:center;font-size:.82em;color:#8A8A80;padding:10px 0 4px}
+  :focus-visible{outline:3px solid var(--red);outline-offset:2px}
+
+  @media (max-width:640px){
+    body{--base:20px}
+    .wrap{padding:0 16px}
+    main.wrap{padding-top:34px}
+    .card{padding:18px 16px}
+    .map{margin-left:calc(-1 * (16px + var(--bw)));margin-right:calc(-1 * (16px + var(--bw)))}
+    .routes{grid-template-columns:1fr}          /* 버튼을 한 줄에 하나씩 — 크게 */
+    .routes button{min-height:64px}
+    .tl li{flex-direction:column;gap:4px}      /* 시간과 내용을 위아래로 */
+    .tl time{width:auto}
+  }
+  @media print{
+    body{background:#fff}
+    .textsize,.btn{display:none}
+    [data-info]{display:block !important}
+    [data-for]{display:block !important}
+    .route-line{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <!-- ════════ [수정 2] 행사 정보 ════════ -->
+    <p class="brand">한국지적발달장애인복지협회 · 서울시립발달장애인복지관</p>
+    <p class="eyebrow">2026 서울발달장애인사생대회</p>
+    <h1>자원봉사자<br>안내문</h1>
+    <p class="when">전통을 그리고, 사람을 만나다
+      <small>2026. 9. 29.(화) · 국립민속박물관</small></p>
+    <div class="textsize">
+      <span id="ts-label">글자 크기</span>
+      <button type="button" data-scale="1" aria-pressed="true" aria-describedby="ts-label">가</button>
+      <button type="button" data-scale="1.18" aria-pressed="false" style="font-size:1.18em" aria-describedby="ts-label">가</button>
+      <button type="button" data-scale="1.4" aria-pressed="false" style="font-size:1.4em" aria-describedby="ts-label">가</button>
+      <button type="button" data-scale="1.65" aria-pressed="false" style="font-size:1.6em" aria-describedby="ts-label">가</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ════════ [수정 2] 봉사 개요 ════════ -->
+<div class="card hero">
+  <h2>봉사 개요</h2>
+  <dl class="info">
+    <dt>봉사 시간</dt><dd><b>2026. 9. 29.(화)<br>08:50 – 15:30</b></dd>
+    <dt>집결 장소</dt><dd><b>국립민속박물관</b><br>서울 종로구 삼청로 37</dd>
+    <dt>집결 시간</dt><dd><b>08:50까지</b></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h2>하루 흐름</h2>
+  <ul class="tl">
+    <li class="key"><time>08:50</time><div class="what">정문 앞 집결 · 오리엔테이션<br><span style="font-size:.9em;color:var(--red);font-weight:800">늦지 않게 와주세요</span></div></li>
+    <li><time>09:00–10:00</time><div class="what">행사장 준비, 물품 세팅</div></li>
+    <li><time>10:00–11:00</time><div class="what">참가자 접수 안내</div></li>
+    <li><time>11:00–12:00</time><div class="what">공연 진행 지원</div></li>
+    <li><time>12:00–13:30</time><div class="what">점심 · 식사 자리 안내</div></li>
+    <li><time>13:00–15:00</time><div class="what">이벤트부스 지원, 작품 접수</div></li>
+    <li class="key"><time>15:00–15:30</time><div class="what">작품 정리, 행사장 정돈 후 마무리</div></li>
+  </ul>
+  <p class="sub" style="margin:12px 0 0">현장 상황에 따라 조정될 수 있습니다.</p>
+</div>
+
+<!-- ════════ [수정 3] 봉사 역할 ════════ -->
+<div class="card">
+  <h2>무슨 일을 하나요</h2>
+  <p class="sub">현장에서 조를 나눠 배정해 드립니다. 처음이셔도 담당자가 옆에서 함께합니다.</p>
+  <ul class="roles">
+    <li><div><b>접수 보조</b><span>참가 확인, 명단 대조, 물품 전달</span></div></li>
+    <li><div><b>물품 배부</b><span>공식 도화지, 종이팔찌, 간식 쿠폰 나눠드리기</span></div></li>
+    <li><div><b>동선 안내</b><span>화장실·식사 장소·부스 위치를 안내하고 길을 잡아드리기</span></div></li>
+    <li><div><b>이벤트부스 지원</b><span>부스 진행을 돕고 줄 서기를 안내</span></div></li>
+    <li><div><b>작품 접수·정리</b><span>완성된 그림을 받아 분류하고 행사장을 정돈</span></div></li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>복장과 준비물</h2>
+  <div class="tags">
+    <span>편한 옷차림</span><span>운동화</span><span>텀블러·물병</span><span>모자·양산</span>
+  </div>
+  <dl class="info" style="margin-top:16px">
+    <dt>복장</dt><dd>많이 걷고 서 있는 일이 많습니다. <b>운동화</b>를 꼭 신어주세요</dd>
+    <dt>물</dt><dd>행사장 내 정수기는 있으나 <b>일회용 종이컵이 없습니다</b></dd>
+    <dt>날씨</dt><dd>야외 활동이 많습니다. 더위·비 대비를 해주세요</dd>
+    <dt>중식</dt><dd><b>봉사자 점심은 제공됩니다</b><br>배정된 자리와 시간은 현장에서 안내드립니다</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h2>발달장애인을 만날 때</h2>
+  <p class="sub">어렵지 않습니다. 아래만 기억해 주세요.</p>
+  <ul class="tips">
+    <li><div><b>천천히, 짧게 말해주세요.</b> 한 번에 한 가지씩 전하면 훨씬 잘 전달됩니다.</div></li>
+    <li><div><b>나이에 맞게 존중해 주세요.</b> 성인에게는 성인에게 하듯 말을 건네주세요.</div></li>
+    <li><div><b>몸에 손대기 전에 먼저 물어봐 주세요.</b> 갑작스러운 접촉에 놀라실 수 있습니다.</div></li>
+    <li><div><b>대답을 기다려 주세요.</b> 시간이 조금 더 걸릴 뿐, 대신 답해주지 않으셔도 됩니다.</div></li>
+    <li><div><b>인솔자나 보호자가 계시면 함께 여쭤봐 주세요.</b></div></li>
+    <li><div>힘들어하는 분이 보이면 <b>혼자 해결하려 하지 마시고 담당자를 불러주세요.</b></div></li>
+  </ul>
+</div>
+
+<p class="divider-label">행사장 찾아오기</p>
+
+<div class="card">
+    <h2 id="t-map">오시는 길</h2>
+    <p class="sub">출발하는 곳을 누르면 그 길만 지도에 나옵니다. <b>08:50까지 정문 앞</b>으로 와주세요.</p>
+
+    <div class="routes" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-route="anguk"><span class="ln ln3">3</span>안국역<br>1번 출구</button>
+      <button type="button" role="tab" aria-selected="false" data-route="gyeongbok"><span class="ln ln3">3</span>경복궁역<br>4번 출구</button>
+      <button type="button" role="tab" aria-selected="false" data-route="gwang1"><span class="ln ln5">5</span>광화문역<br>2번 출구</button>
+      <button type="button" role="tab" aria-selected="false" data-route="parking"><span class="ln lnp">P</span>주차장에서<br>걸어오는 길</button>
+    </div>
+
+    <figure>
+      <div class="map">
+        <svg viewBox="0 0 600 640" role="img" aria-labelledby="map-alt">
+          <title id="map-alt">국립민속박물관 정문까지 걸어오는 길 약도</title>
+          <rect width="600" height="640" fill="#EDECE8"/>
+
+          <!-- 도로망 -->
+          <g stroke="#FFFFFF" fill="none" stroke-linecap="round">
+            <path d="M358 0 L358 268" stroke-width="26"/>
+            <path d="M10 268 L595 268" stroke-width="26"/>
+            <path d="M232 268 L232 640" stroke-width="26"/>
+            <path d="M528 268 L528 60" stroke-width="18"/>
+            <path d="M358 92 L528 92" stroke-width="16"/>
+            <path d="M100 268 L100 40" stroke-width="16"/>
+            <path d="M430 268 L470 92" stroke-width="14"/>
+            <path d="M232 430 L560 430" stroke-width="14"/>
+            <path d="M232 540 L560 540" stroke-width="14"/>
+            <path d="M430 640 L430 268" stroke-width="14"/>
+          </g>
+          <g fill="#8C887E" font-size="19" font-weight="700">
+            <text x="378" y="200" transform="rotate(-90 378 200)">삼청로</text>
+            <text x="60" y="258">사직로 · 율곡로</text>
+            <text x="212" y="500" transform="rotate(-90 212 500)">세종대로</text>
+          </g>
+          <text x="470" y="34" font-size="20" font-weight="800" fill="#3E9BD0">삼청동</text>
+
+          <!-- 경복궁 -->
+          <path d="M100 18 L334 18 L334 250 L150 250 L150 224 L100 224 Z" fill="#3FB44E" stroke="#1D1D1B" stroke-width="3"/>
+          <text x="190" y="160" font-size="26" font-weight="800" fill="#0E5B24">경복궁</text>
+
+          <!-- 국립민속박물관 -->
+          <rect x="248" y="30" width="92" height="50" rx="8" fill="#0E5B24" stroke="#1D1D1B" stroke-width="3"/>
+          <text x="294" y="52" font-size="18" font-weight="800" fill="#fff" text-anchor="middle">국립민속</text>
+          <text x="294" y="72" font-size="18" font-weight="800" fill="#fff" text-anchor="middle">박물관</text>
+          <path d="M358 62 l6 12 13 2 -9.5 9 2.5 13 -12 -6 -12 6 2.5 -13 -9.5 -9 13 -2 Z" fill="#F2B01E" stroke="#1D1D1B" stroke-width="2.4"/>
+          <text x="386" y="66" font-size="19" font-weight="800" fill="#C8302B">정문</text>
+          <text x="386" y="86" font-size="17" font-weight="700" fill="#C8302B">접수처</text>
+
+          <!-- 주변 -->
+          <g data-for="anguk parking">
+            <rect x="398" y="112" width="122" height="52" rx="8" fill="#fff" stroke="#1D1D1B" stroke-width="2.6"/>
+            <text x="459" y="134" font-size="17" font-weight="700" fill="#4A463E" text-anchor="middle">국립현대미술관</text>
+            <text x="459" y="154" font-size="17" font-weight="700" fill="#4A463E" text-anchor="middle">서울관</text>
+          </g>
+          <g data-for="anguk">
+            <rect x="452" y="30" width="104" height="38" rx="8" fill="#fff" stroke="#1D1D1B" stroke-width="2.6"/>
+            <text x="504" y="55" font-size="17" font-weight="700" fill="#4A463E" text-anchor="middle">정독도서관</text>
+          </g>
+          <g data-for="gwang1">
+            <rect x="252" y="440" width="128" height="46" rx="8" fill="#fff" stroke="#1D1D1B" stroke-width="2.6"/>
+            <text x="316" y="461" font-size="17" font-weight="700" fill="#4A463E" text-anchor="middle">대한민국</text>
+            <text x="316" y="479" font-size="17" font-weight="700" fill="#4A463E" text-anchor="middle">역사박물관</text>
+          </g>
+
+          <!-- 주차장 -->
+          <g data-for="parking">
+            <circle cx="322" cy="200" r="17" fill="#fff" stroke="#1D1D1B" stroke-width="3"/>
+            <text x="322" y="207" font-size="19" font-weight="800" text-anchor="middle" fill="#1D1D1B">P</text>
+            <text x="298" y="176" font-size="17" font-weight="800" fill="#1D1D1B" text-anchor="end">경복궁</text>
+            <text x="298" y="196" font-size="17" font-weight="800" fill="#1D1D1B" text-anchor="end">주차장</text>
+            <circle cx="404" cy="188" r="17" fill="#fff" stroke="#1D1D1B" stroke-width="3"/>
+            <text x="404" y="195" font-size="19" font-weight="800" text-anchor="middle" fill="#1D1D1B">P</text>
+            <text x="428" y="194" font-size="17" font-weight="800" fill="#1D1D1B">미술관 주차장</text>
+          </g>
+
+          <!-- 출발지 -->
+          <g data-for="anguk">
+            <rect x="494" y="234" width="100" height="36" rx="10" fill="#EF7C1C" stroke="#1D1D1B" stroke-width="3"/>
+            <text x="544" y="259" font-size="18" font-weight="800" fill="#fff" text-anchor="middle">안국역 1번</text>
+          </g>
+          <g data-for="gyeongbok">
+            <rect x="14" y="278" width="116" height="36" rx="10" fill="#EF7C1C" stroke="#1D1D1B" stroke-width="3"/>
+            <text x="72" y="303" font-size="18" font-weight="800" fill="#fff" text-anchor="middle">경복궁역 4번</text>
+          </g>
+          <g data-for="gwang1">
+            <rect x="176" y="576" width="122" height="36" rx="10" fill="#8B5FA8" stroke="#1D1D1B" stroke-width="3"/>
+            <text x="237" y="601" font-size="18" font-weight="800" fill="#fff" text-anchor="middle">광화문역 2번</text>
+          </g>
+
+          <!-- 경로 -->
+          <g data-for="anguk">
+            <path class="route-line alt" d="M544 240 L540 268 L372 268 L358 250 L358 84"/>
+            <path class="route-line" d="M544 240 L528 214 L528 96 L374 92 L358 84"/>
+          </g>
+          <g data-for="gyeongbok"><path class="route-line" d="M72 278 L100 268 L344 268 L358 250 L358 84"/></g>
+          <g data-for="gwang1"><path class="route-line" d="M237 576 L232 300 L246 268 L344 268 L358 250 L358 84"/></g>
+          <g data-for="parking">
+            <path class="route-line" d="M322 200 L348 192 L358 170 L358 84"/>
+            <path class="route-line alt" d="M404 188 L374 168 L358 146 L358 84"/>
+          </g>
+        </svg>
+      </div>
+      <figcaption>약도는 위치를 쉽게 보시라고 그린 그림입니다. 실제 거리와 다를 수 있습니다.</figcaption>
+    </figure>
+
+    <div id="rt-info">
+      <div data-info="anguk">
+        <div class="legend">
+          <span><i></i>삼청동 골목길</span>
+          <span class="b"><i></i>율곡로 큰길</span>
+        </div>
+        <p class="rt-title">안국역 1번 출구에서 출발</p>
+        <div class="rt-meta"><span>걸어서 약 15분</span><span>3호선</span><span>약 1.1km</span><span class="warnchip">오르막 조금 있음</span></div>
+        <ol class="steps">
+          <li>율곡로 큰길: 1번 출구에서 경복궁 방향(서쪽)으로 직진합니다.</li>
+          <li>동십자각에서 오른쪽 삼청로로 들어서면 정문입니다.</li>
+          <li>삼청동 골목길: 1번 출구에서 북쪽 감고당길로 올라갑니다.</li>
+          <li>국립현대미술관 서울관을 지나 삼청로로 나오면 정문입니다.</li>
+        </ol>
+      </div>
+      <div data-info="gyeongbok" hidden>
+        <p class="rt-title">경복궁역 4번 출구에서 출발</p>
+        <div class="rt-meta"><span>걸어서 약 15분</span><span>3호선</span><span>약 1.1km</span><span>평지 · 휠체어 이동 편함</span></div>
+        <ol class="steps">
+          <li>4번 출구에서 경복궁 담장을 따라 동쪽으로 걷습니다.</li>
+          <li>광화문 앞을 지나 동십자각까지 직진합니다.</li>
+          <li>동십자각에서 왼쪽 삼청로로 들어섭니다.</li>
+          <li>경복궁 동문·주차장을 지나 올라가면 정문입니다.</li>
+        </ol>
+      </div>
+      <div data-info="gwang1" hidden>
+        <p class="rt-title">광화문역 2번 출구에서 출발</p>
+        <div class="rt-meta"><span>걸어서 약 20분</span><span>5호선</span><span>약 1.5km</span><span>평지 · 넓은 인도</span></div>
+        <ol class="steps">
+          <li>2번 출구에서 세종대로를 따라 경복궁 방향으로 직진합니다.</li>
+          <li>광화문 앞 사거리에서 오른쪽으로 갑니다.</li>
+          <li>동십자각에서 삼청로로 들어섭니다.</li>
+          <li>삼청로를 따라 올라가면 정문입니다.</li>
+        </ol>
+      </div>
+      <div data-info="parking" hidden>
+        <div class="legend">
+          <span><i></i>경복궁 주차장</span>
+          <span class="b"><i></i>미술관 주차장</span>
+        </div>
+        <p class="rt-title">주차장에서 걸어오는 길</p>
+        <div class="rt-meta"><span>걸어서 5~10분</span></div>
+        <ol class="steps">
+          <li>경복궁 주차장은 경복궁 동문 쪽, 미술관 주차장은 국립현대미술관 서울관 옆입니다.</li>
+          <li>주차 후 삼청로 인도로 나옵니다.</li>
+          <li>삼청로를 따라 북쪽으로 걸으면 정문입니다.</li>
+        </ol>
+        <div class="warn" style="margin-top:12px">행사장 안에는 주차할 수 없고, 주차비는 개별 부담입니다.</div>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--green-pale);border-color:var(--green-deep);margin:16px 0 0">
+      <h2 style="font-size:1em">휠체어로 오신다면</h2>
+      <p style="color:var(--ink)"><b>경복궁역 4번 출구</b>가 가장 편합니다. 엘리베이터가 있고 정문까지 계단·오르막이 없습니다. 안국역 쪽 골목길은 오르막이 있어 권하지 않습니다.</p>
+    </div>
+
+    <a class="btn" href="https://map.naver.com/p/search/국립민속박물관" target="_blank" rel="noopener">네이버 지도에서 길찾기</a>
+    <a class="btn ghost" href="https://map.kakao.com/?q=국립민속박물관" target="_blank" rel="noopener">카카오맵에서 길찾기</a>
+  </div>
+  <div class="card">
+    <h2>문의</h2>
+    <p>봉사 관련 문의나 당일 늦으실 것 같을 때 연락해 주세요.</p>
+    <dl class="info" style="margin:14px 0">
+      <dt>주관</dt><dd>서울시립발달장애인복지관</dd>
+      <dt>메일</dt><dd>idd1500@daum.net</dd>
+    </dl>
+    <a class="btn call" href="tel:02-840-1505">02-840-1505 전화하기</a>
+  </div>
+
+  <p class="foot">주최 한국지적발달장애인복지협회 · 후원 서울특별시<br>주관 국립민속박물관, 서울시립발달장애인복지관</p>
+</main>
+
+<script>
+(function(){
+  var ROUTES = ['anguk','gyeongbok','gwang1','parking'];
+
+  /* 출발지 버튼 — 고른 경로만 지도와 설명에 남깁니다 */
+  var btns = document.querySelectorAll('.routes button');
+  var layers = document.querySelectorAll('[data-for]');
+  function showRoute(key){
+    btns.forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.route === key)); });
+    layers.forEach(function(g){
+      var on = g.getAttribute('data-for').split(' ').indexOf(key) !== -1;
+      g.style.display = on ? '' : 'none';
+    });
+    ROUTES.forEach(function(k){
+      var el = document.querySelector('[data-info="' + k + '"]');
+      if (el) el.hidden = (k !== key);
+    });
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ showRoute(b.dataset.route); }); });
+  showRoute('anguk');
+
+  /* 글자 크기 */
+  var sizeBtns = document.querySelectorAll('.textsize button');
+  sizeBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      sizeBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b === btn)); });
+      document.documentElement.style.setProperty('--scale', btn.dataset.scale);
+    });
+  });
+})();
+</script>
+</body>
+</html>
